@@ -38,7 +38,8 @@
         <button onclick="toast('info', 'A default info message')">Info</button>
         <button onclick="toast('ok', 'Green OK message')">OK</button>
         <button onclick="toast('warning', 'This warning message is yellow')">Warning</button>
-        <button onclick="toast('error', 'Errors are RED')" class="error">Error</button>
+        <button onclick="toast('error', 'Errors are RED')">Error</button>
+        <button onclick="toast('info').innerHTML='A very <b>bold</b> message'">HTML</button>
       </p>
     </div>
     <script>
@@ -47,12 +48,13 @@
               window.toast = this.toast.bind(this);
           }
 
-          toast(level, message) {
+          toast(level, message = '') {
               const el = document.createElement('toast-message');
               el.addEventListener('animationend', () => el.remove());
               el.classList.add(level);
               el.innerText = message;
               this.prepend(el);
+              return el;
           }
       }
 
