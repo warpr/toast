@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Toasts</title>
-    <link rel="stylesheet" href="./toast.css" />
+    <link rel="stylesheet" href="toast.css" />
+    <script type="module" src="toast.js"></script>
     <style>
       body {
           background: black;
@@ -14,25 +15,18 @@
           font-size: 1.5rem;
       }
 
-      button {
-          padding: 0.5em 1em;;
-      }
-
-      a,
-      a:visited {
-          color: deepskyblue;
-      }
+      button { padding: 0.5em 1em; }
+      a, a:visited { color: deepskyblue; }
     </style>
   </head>
   <body>
-    <div class="wrapper">
-      <toast-container></toast-container>
-      <h1>Toast</h1>
-      <p>
-        Based on Chris Pennington's
+    <toast-container></toast-container>
+    <h1>Toast</h1>
+    <p>
+        Based on Chris Pennington&rsquo;s
         <a href="https://codepen.io/Coding-in-Public/pen/ZEaKENX">Toast Message codepen</a>,
         there is an <a href="https://youtu.be/EWveKYaX-P0">accompanying video on Youtube</a>.
-      </p>
+    </p>
 
       <p>
         <button onclick="toast('info', 'A default info message')">Info</button>
@@ -42,23 +36,5 @@
         <button onclick="toast('info').innerHTML='A very <b>bold</b> message'">HTML</button>
       </p>
     </div>
-    <script>
-      class toast_container extends HTMLElement {
-          connectedCallback() {
-              window.toast = this.toast.bind(this);
-          }
-
-          toast(level, message = '') {
-              const el = document.createElement('toast-message');
-              el.addEventListener('animationend', () => el.remove());
-              el.classList.add(level);
-              el.innerText = message;
-              this.prepend(el);
-              return el;
-          }
-      }
-
-      customElements.define('toast-container', toast_container);
-    </script>
   </body>
 </html>
