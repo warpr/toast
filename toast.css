@@ -1,23 +1,19 @@
 toast-container {
     position: fixed;
-    top: 1rem;
+    bottom: 1rem;
     right: 1rem;
     display: grid;
     justify-items: end;
     gap: 0.5rem;
 }
 
-toast-message.ok,
-toast-message.info,
-toast-message.warning,
-toast-message.error {
+toast-message {
     display: block;
     padding: 0.5em 1em;
     background-color: #444;
     border-width: 0 0 2px 1em;
     border-style: solid;
-    animation: toast-message-animation 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
-    animation-duration: 7000ms;
+    animation: toast-message-animation 7000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
 }
 
 @keyframes toast-message-animation {
@@ -26,7 +22,7 @@ toast-message.error {
 }
 
 toast-message.ok { border-color: lime; color: silver; }
-toast-message.info { border-color: deepskyblue; color: white; }
-toast-message.warning { border-color: yellow; color: silver; }
+toast-message.info { border-color: deepskyblue; color: silver; }
+toast-message.warning { border-color: yellow; color: white; }
 toast-message.error { border-color: crimson; color: white; }
 

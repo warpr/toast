@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Toasts</title>
-    <link rel="stylesheet" href="./lud-toast.css" />
+    <link rel="stylesheet" href="./toast.css" />
     <style>
       body {
           background: black;
@@ -35,35 +35,27 @@
       </p>
 
       <p>
-        <button onclick="toast(event, 'info', 'A default info message')">Info</button>
-        <button onclick="toast(event, 'ok', 'Green OK message')">OK</button>
-        <button onclick="toast(event, 'warning', 'This warning message is yellow')">Warning</button>
-        <button onclick="toast(event, 'error', 'Errors are RED')" class="error">Error</button>
+        <button onclick="toast('info', 'A default info message')">Info</button>
+        <button onclick="toast('ok', 'Green OK message')">OK</button>
+        <button onclick="toast('warning', 'This warning message is yellow')">Warning</button>
+        <button onclick="toast('error', 'Errors are RED')" class="error">Error</button>
       </p>
     </div>
     <script>
-      class toast_message extends  HTMLElement {
-          connectedCallback() {
-              this.addEventListener('animationend', () => this.remove());
-          }
-
-          set_message(level, message) {
-              this.classList.add(level);
-              this.innerText = message;
-          }
-      }
-
       class toast_container extends HTMLElement {
           connectedCallback() {
               window.toast = this.toast.bind(this);
           }
 
-          toast(event, level, message) {
-              this.appendChild(document.createElement('toast-message')).set_message(level, message);
+          toast(level, message) {
+              const el = document.createElement('toast-message');
+              el.addEventListener('animationend', () => el.remove());
+              el.classList.add(level);
+              el.innerText = message;
+              this.prepend(el);
           }
       }
 
-      customElements.define('toast-message', toast_message);
       customElements.define('toast-container', toast_container);
     </script>
   </body>
