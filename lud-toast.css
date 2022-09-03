@@ -1,0 +1,44 @@
+lud-toasts {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    justify-items: end;
+    gap: 0.5rem;
+}
+
+lud-toast.ok,
+lud-toast.info,
+lud-toast.warning,
+lud-toast.error {
+    display: block;
+    padding: 0.5em 1em;
+    background-color: #444;
+    border-width: 0 0 2px 1em;
+    border-style: solid;
+    animation: lud-toast-animation 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+    animation-duration: 7000ms;
+}
+
+@keyframes lud-toast-animation {
+  0%, 100% { transform: translateX(150%); opacity: 0; }
+  10%, 90% { transform: translateX(0); opacity: 1; }
+}
+
+lud-toast.ok {
+    border-color: lime;
+    color: silver;
+}
+lud-toast.info {
+    border-color: deepskyblue;
+    color: white;
+}
+lud-toast.warning {
+    border-color: yellow;
+    color: silver;
+}
+lud-toast.error {
+    border-color: crimson;
+    color: white;
+}
+

@@ -1,24 +1,65 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sliding Stackable Toast Message Example</title>
-    <link rel="stylesheet" href="./sticky.css">
-    <link rel="stylesheet" href="./style.css">
-
+    <link rel="stylesheet" href="./sticky.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./toast.css" />
+    <link rel="stylesheet" href="./lud-toast.css" />
+    <style>
+      body {
+          background: black;
+          color: white;
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
+      <lud-toasts data-global="true">
+        <!--
+        <lud-info-toast>This is the message</lud-info-toast>
+        <lud-ok-toast>This is the message</lud-ok-toast>
+        <lud-warning-toast>This is the message</lud-warning-toast>
+        <lud-error-toast>This is the message</lud-error-toast>
+        -->
+      </lud-toasts>
       <h1>Sliding Stackable Toast Message Example</h1>
       <p>Create animated stacked toast messages in web app using plain JavaScript and CSS.</p>
       <div class="container">
-        <button class="success" data-message="👊 You got this, kid! 👊">Submit</button>
-        <button class="warning">Delete</button>
-        <button class="info">Agree to Terms</button>
+        <button onclick="toast(event, 'ok', '👊 You got this, kid! 👊')" class="success">Submit</button>
+        <button onclick="toast(event, 'warning', '⚠️ You are burning the food! ⚠️')" class="warning">Warning</button>
+        <button onclick="toast(event, 'error', '⚠️ Ya sure about that? ⚠️')" class="error">Delete</button>
+        <button onclick="toast(event, 'info', '✍️ Write this down… ✍️')" class="info">Agree to Terms</button>
       </div>
     </div>
     <script  src="./script.js"></script>
+    <script>
+      class lud_toast extends  HTMLElement {
+          connectedCallback() {
+              this.addEventListener('animationend', () => this.remove());
+          }
+      }
+
+      class lud_toasts extends HTMLElement {
+          connectedCallback() {
+              if (this.dataset.global) {
+                  window.toast = this.toast.bind(this);
+              }
+          }
+
+          toast(event, level, message) {
+              // WARNING!  message is not escaped here, perhaps we can use
+              // templates/slots instead?
+              console.log('toast(', event, level, message, ')');
+              this.insertAdjacentHTML('beforeend', `<lud-toast class="${level}">${message}</lud-toast>`);
+          }
+      }
+
+      customElements.define('lud-toast', lud_toast);
+      customElements.define('lud-toasts', lud_toasts);
+    </script>
   </body>
 </html>

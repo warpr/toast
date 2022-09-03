@@ -1,11 +1,12 @@
 const success = document.querySelector('.success');
 const warning = document.querySelector('.warning');
+const error = document.querySelector('.error');
 const info = document.querySelector('.info');
 
 let toastContainer;
 
 function generateToast({
-  message,
+  message = '👊 You got this, kid! 👊',
   background = '#00214d',
   color = '#fffffe',
   length = '5000ms',
@@ -21,41 +22,7 @@ function generateToast({
 }
 
 (function initToast(){
-  document.body.insertAdjacentHTML('afterbegin', `<div class="toast-container"></div>
-  <style>
-  
-.toast-container {
-  position: fixed;
-  top: 1rem;
-  right: 1.5rem;
-  display: grid;
-  justify-items: end;
-  gap: 1.5rem;
-}
-
-.toast {
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 1;
-  padding: 0.5em 1em;
-  background-color: lightblue;
-  animation: toastIt 3000ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
-}
-
-@keyframes toastIt {
-  0%,
-  100% {
-    transform: translateY(-150%);
-    opacity: 0;
-  }
-  10%,
-  90% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-  </style>
-  `);
+  document.body.insertAdjacentHTML('afterbegin', `<div class="toast-container"></div>`);
   toastContainer = document.querySelector('.toast-container');
 })()
 
@@ -79,8 +46,17 @@ info.addEventListener("click", () => {
 
 warning.addEventListener("click", () => {
   generateToast({
+    message: "⚠️ You're burning the food! ⚠️",
+    background: "hsl(350 100% 66.5%)",
+    color: "hsl(350 100% 13.5%)",
+  });
+});
+
+error.addEventListener("click", () => {
+  generateToast({
     message: "⚠️ Ya sure about that? ⚠️",
     background: "hsl(350 100% 66.5%)",
     color: "hsl(350 100% 13.5%)",
   });
 });
+

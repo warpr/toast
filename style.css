@@ -52,6 +52,12 @@ button:is(:hover, :focus){
   box-shadow: 10px 10px hsl(350 100% 13.5%);
 }
 
+.error {
+  background-color: hsl(350 100% 66.5%);
+  color: hsl(350 100% 13.5%);
+  box-shadow: 10px 10px hsl(350 100% 13.5%);
+}
+
 .info {
   background-color: hsl(51 97.8% 65.1%);
   color: hsl(51 97.8% 12.1%);
